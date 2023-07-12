@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Registrarse</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="formRegistro"  class="registro-form" (submit)="onSubmit()">
+
+      <mat-form-field class="registro-form-field">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" placeholder="Nombre"/>
+
+        <mat-error *ngIf="formRegistro.controls['nombre']?.errors?.['required']"> Este campo es requerido </mat-error>
+        <mat-error *ngIf="formRegistro.controls['nombre']?.errors?.['minlength']"> Debe contener minimo 3 caracteres </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="registro-form-field">
+        <mat-label>Apellidos</mat-label>
+        <input matInput formControlName="apellidos" placeholder="Apellidos"/>
+
+        <mat-error *ngIf="formRegistro.controls['apellidos']?.errors?.['required']"> Este campo es requerido </mat-error>
+        <mat-error *ngIf="formRegistro.controls['apellidos']?.errors?.['minlength']"> Debe contener minimo 3 caracteres </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="registro-form-field">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Email"/>
+
+        <mat-error *ngIf="formRegistro.controls['email']?.errors?.['required']"> Este campo es requerido </mat-error>
+        <mat-error *ngIf="formRegistro.controls['email']?.errors?.['email']"> Debe ser un correo valido </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="registro-form-field">
+        <mat-label>Edad</mat-label>
+        <input matInput type="number" formControlName="edad" placeholder="Edad"/>
+
+        <mat-error *ngIf="formRegistro.controls['edad']?.errors?.['required']"> Este campo es requerido </mat-error>
+        <mat-error *ngIf="formRegistro.controls['edad']?.errors?.['min']"> Minimo debe tener 18 años </mat-error>
+        <mat-error *ngIf="formRegistro.controls['edad']?.errors?.['max']"> Maximo debe tener 60 años </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="registro-form-field">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" placeholder="Contraseña"/>
+
+        <mat-error *ngIf="formRegistro.controls['password']?.errors?.['required']"> Este campo es requerido </mat-error>
+        <mat-error *ngIf="formRegistro.controls['password']?.errors?.['minlength']"> Debe tener minimo 6 carectes </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" >Registrarse</button>
+      <button mat-raised-button color="warn" routerLink="/login" > Volver </button>
+    </form>
+  </mat-card-content>
+
+</mat-card>

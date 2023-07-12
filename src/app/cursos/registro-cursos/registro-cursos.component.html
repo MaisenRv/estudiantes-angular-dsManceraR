@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Registro cursos</h2>
+<mat-dialog-content>
+  <form [formGroup]="formRegistroCursos" (submit)="onSubmit()" >
+
+    <mat-form-field class="formRegistroRow">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" placeholder="Nombre"/>
+      <mat-error *ngIf="formRegistroCursos.controls['nombre']?.errors?.['required']" > Este campo es requerido </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="formRegistroRow">
+      <mat-label>Descripcion</mat-label>
+      <input matInput formControlName="descripcion" placeholder="Descripcion"/>
+      <mat-error *ngIf="formRegistroCursos.controls['descripcion']?.errors?.['required']" > Este campo es requerido </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="formRegistroRow">
+      <mat-label>Cupo</mat-label>
+      <input type="number" matInput formControlName="cupo" placeholder="Cupo"/>
+      <mat-error *ngIf="formRegistroCursos.controls['cupo']?.errors?.['required']" > Este campo es requerido </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="formRegistroRow">
+      <mat-label>Horario</mat-label>
+      <input matInput formControlName="horario" placeholder="Horario"/>
+      <mat-error *ngIf="formRegistroCursos.controls['horario']?.errors?.['required']" > Este campo es requerido </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="formRegistroRow">
+      <mat-label>Profesor</mat-label>
+      <input matInput formControlName="profesor" placeholder="Profesor"/>
+      <mat-error *ngIf="formRegistroCursos.controls['profesor']?.errors?.['required']" > Este campo es requerido </mat-error>
+    </mat-form-field>
+
+    <mat-dialog-actions>
+      <button mat-raised-button mat-dialog-close>Close</button>
+      <button  mat-raised-button type="submit" color="primary"> Enviar </button>
+    </mat-dialog-actions>
+
+  </form>
+</mat-dialog-content>
+

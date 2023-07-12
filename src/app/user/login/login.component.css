@@ -1,0 +1,23 @@
+mat-card{
+  width: 400px;
+  margin: 0 auto;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form-field{
+  margin-bottom: 16px;
+}
+
+.login-links{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.login-link{
+  text-decoration: none;
+}

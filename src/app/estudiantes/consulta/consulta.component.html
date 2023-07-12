@@ -1,0 +1,51 @@
+
+<div class="botones">
+  <button mat-raised-button color="primary" (click)="abrirDialogoRegistro()" > Registral estudiante</button>
+</div>
+
+<table mat-table [dataSource]="estudiantes" >
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef > ID </th>
+    <th mat-cell *matCellDef="let estudiante" > {{ estudiante.estudiante_id }} </th>
+  </ng-container>
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef > Nombre </th>
+    <th mat-cell *matCellDef="let estudiante" > {{ estudiante.estudiante_nombres }} </th>
+  </ng-container>
+  <ng-container matColumnDef="apellidos">
+    <th mat-header-cell *matHeaderCellDef > Apellidos </th>
+    <th mat-cell *matCellDef="let estudiante" > {{ estudiante.estudiante_apellidos }} </th>
+  </ng-container>
+  <ng-container matColumnDef="telefono">
+    <th mat-header-cell *matHeaderCellDef > Telefono </th>
+    <th mat-cell *matCellDef="let estudiante" > {{ estudiante.estudiante_celular }} </th>
+  </ng-container>
+
+  <ng-container matColumnDef="correo">
+    <th mat-header-cell *matHeaderCellDef > Email </th>
+    <th mat-cell *matCellDef="let estudiante" > {{ estudiante.estudiante_correo }} </th>
+  </ng-container>
+
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef > Estado </th>
+    <th mat-cell *matCellDef="let estudiante" > {{ estudiante.estudiante_estado.toLowerCase() }} </th>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones" >
+    <th mat-header-cell *matHeaderCellDef > Acciones </th>
+    <th mat-cell  *matCellDef="let estudiante">
+      <button mat-icon-button color="primary" matTooltip="Ver estudiante"  (click)="verEstudiante(estudiante.estudiante_id)">
+        <mat-icon fontIcon="visibility"></mat-icon>
+      </button>
+      <button mat-icon-button color="accent" matTooltip="Editar estudiante" (click)="editarEstudiante(estudiante.estudiante_id)">
+        <mat-icon fontIcon="edit"></mat-icon>
+      </button>
+      <button mat-icon-button color="warn" matTooltip="Inhabilitar estudiante" (click)="actualizarEstadoEtudiante(estudiante.estudiante_id,estudiante.estudiante_estado)">
+        <mat-icon fontIcon="person_remove"></mat-icon>
+      </button>
+    </th>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns; " ></tr>
+</table>
