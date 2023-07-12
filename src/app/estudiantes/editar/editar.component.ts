@@ -4,6 +4,7 @@ import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
+import { EstudianteGET, EstudiantePUT } from 'src/app/interfaces/shared/estudiante.interface';
 
 @Component({
   selector: 'app-editar',
@@ -36,7 +37,7 @@ export class EditarComponent implements OnInit {
   ngOnInit(): void {
     this.servicio.obtenerEstudiante(this.data.id).subscribe({
       next: (res)=>{
-        const estudianteData = res.data[0];
+        const estudianteData:EstudianteGET = res.data[0];
 
         this.formEditar.setValue({
           nombres:estudianteData.estudiante_nombres,
@@ -56,12 +57,13 @@ export class EditarComponent implements OnInit {
   }
   onSubmit(){
     if (this.formEditar.valid) {
-      const estudiante = {
+      const estudiante:EstudiantePUT = {
         nombres: this.formEditar.value.nombres,
         apellidos: this.formEditar.value.apellidos,
         celular: Number(this.formEditar.value.celular),
         linkedin: this.formEditar.value.linkedin,
         github: this.formEditar.value.github,
+        correo: this.formEditar.value.correo
       }
 
       this.servicio.actualizarEstudiante(this.data.id,estudiante).subscribe({
@@ -71,7 +73,6 @@ export class EditarComponent implements OnInit {
         },
         error:(err)=>{
           console.log(err);
-
         }
       })
     }

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 // Variables de entorno
 import { environment } from 'src/environments/environment';
+import { EstadoEstudiantePUT, EstudiantePOST, EstudiantePUT } from '../interfaces/shared/estudiante.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class EstudiantesService {
     return this.http.get(environment.apiUrl + 'estudiantes', this.httpOptions);
   }
 
-  crearEstudiante(estudiante:any): Observable<any>{
+  crearEstudiante(estudiante:EstudiantePOST): Observable<any>{
     return this.http.post(environment.apiUrl +'estudiantes', estudiante, this.httpOptions);
   }
 
@@ -34,11 +35,11 @@ export class EstudiantesService {
     return this.http.get(environment.apiUrl+'estudiantes/'+id, this.httpOptions);
   }
 
-  actualizarEstudiante(id:number, estudiante:any):Observable<any>{
+  actualizarEstudiante(id:number, estudiante:EstudiantePUT):Observable<any>{
     return this.http.put(environment.apiUrl+'estudiantes/'+id, estudiante, this.httpOptions);
   }
 
-  actualizarEstadoEstudiante(id:number, estado:any):Observable<any>{
+  actualizarEstadoEstudiante(id:number, estado:EstadoEstudiantePUT):Observable<any>{
     return this.http.put(environment.apiUrl+'estudiantes/estado/'+id,estado,this.httpOptions)
   }
 }

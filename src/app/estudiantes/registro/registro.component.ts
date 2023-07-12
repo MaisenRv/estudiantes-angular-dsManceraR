@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
 
 import { MatDialogRef } from '@angular/material/dialog';
+import { EstudiantePOST } from 'src/app/interfaces/shared/estudiante.interface';
 
 @Component({
   selector: 'app-registro',
@@ -43,14 +44,18 @@ export class RegistroComponent implements OnInit {
 
   onSubmit(){
     if (this.formRegistro.valid) {
-      console.log(JSON.stringify(this.formRegistro.value));
-      this.servicio.crearEstudiante(JSON.stringify(this.formRegistro.value)).subscribe({
+      const nuevoEstudiante:EstudiantePOST = this.formRegistro.value;
+      this.servicio.crearEstudiante(nuevoEstudiante).subscribe({
         next: (res)=>{
           this.dialogR.close();
-          // console.log(res);
+          console.log(res);
         },
-        error: (error)=>{
-          console.log(error);
+        error: (err)=>{
+          let msg:String = "";
+          for(const msgError of err.error.message){
+            msg += msgError + " \n";
+          }
+          alert(msg);
         }
       })
     }

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject  } from '@angular/core';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
+import { EstudianteGET } from 'src/app/interfaces/shared/estudiante.interface';
 
 @Component({
   selector: 'app-ver',
@@ -10,7 +11,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class VerComponent implements OnInit{
 
-  estudiante!:any;
+  estudiante!:EstudianteGET;
 
   constructor(
     private servicio:EstudiantesService,
@@ -24,6 +25,8 @@ export class VerComponent implements OnInit{
     this.servicio.obtenerEstudiante(this.data.id).subscribe({
       next: (res)=>{
         this.estudiante = res.data[0];
+        console.log(this.estudiante);
+
       },
       error:(err)=>{
         console.log(err);
