@@ -19,11 +19,11 @@ export class RegistroCursosComponent implements OnInit {
   }
   ngOnInit(): void {
     this.formRegistroCursos = this.fb.group({
-      nombre: ['',[Validators.required]],
-      descripcion: ['',[Validators.required]],
+      nombre: ['',[Validators.required,Validators.minLength(3),Validators.maxLength(10)]],
+      descripcion: ['',[Validators.required,Validators.maxLength(100)]],
       cupo: ['',[Validators.required]],
       horario: ['',[Validators.required]],
-      profesor: ['',[Validators.required]],
+      profesor: ['',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]],
     })
   }
 

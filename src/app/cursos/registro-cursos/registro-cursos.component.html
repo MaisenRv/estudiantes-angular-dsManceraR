@@ -6,12 +6,15 @@
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="nombre" placeholder="Nombre"/>
       <mat-error *ngIf="formRegistroCursos.controls['nombre']?.errors?.['required']" > Este campo es requerido </mat-error>
+      <mat-error *ngIf="formRegistroCursos.controls['nombre']?.errors?.['minlength']" > Este campo debe tener minino 3 caracteres </mat-error>
+      <mat-error *ngIf="formRegistroCursos.controls['nombre']?.errors?.['maxlength']" > Este campo debe tener maximo 10 caracteres </mat-error>
     </mat-form-field>
 
     <mat-form-field class="formRegistroRow">
       <mat-label>Descripcion</mat-label>
       <input matInput formControlName="descripcion" placeholder="Descripcion"/>
       <mat-error *ngIf="formRegistroCursos.controls['descripcion']?.errors?.['required']" > Este campo es requerido </mat-error>
+      <mat-error *ngIf="formRegistroCursos.controls['descripcion']?.errors?.['maxlength']" > Este campo debe tener maximo 100 caracteres </mat-error>
     </mat-form-field>
 
     <mat-form-field class="formRegistroRow">
@@ -30,6 +33,8 @@
       <mat-label>Profesor</mat-label>
       <input matInput formControlName="profesor" placeholder="Profesor"/>
       <mat-error *ngIf="formRegistroCursos.controls['profesor']?.errors?.['required']" > Este campo es requerido </mat-error>
+      <mat-error *ngIf="formRegistroCursos.controls['profesor']?.errors?.['minlength']" > Este campo debe tener minimo 3 caracteres </mat-error>
+      <mat-error *ngIf="formRegistroCursos.controls['profesor']?.errors?.['maxlength']" > Este campo debe tener maximo 20 caracteres </mat-error>
     </mat-form-field>
 
     <mat-dialog-actions>
