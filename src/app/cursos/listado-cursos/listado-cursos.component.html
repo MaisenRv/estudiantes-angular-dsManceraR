@@ -1,47 +1,49 @@
 <div class="botones">
-  <button mat-raised-button color="primary"  (click)="abrirDialogAgregarCurso()"> Registrar curso</button>
+  <button mat-raised-button color="primary" (click)="abrirDialogAgregarCurso()"> Registrar curso</button>
 </div>
 
-<table mat-table [dataSource]="cursos" >
-  <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef > Nombre </th>
-    <th mat-cell *matCellDef="let cursos" > {{ cursos.curso_nombre }} </th>
-  </ng-container>
-  <ng-container matColumnDef="descripcion">
-    <th mat-header-cell *matHeaderCellDef > Descripcion </th>
-    <th mat-cell *matCellDef="let cursos" > {{ cursos.curso_descripcion }} </th>
-  </ng-container>
-  <ng-container matColumnDef="cupo">
-    <th mat-header-cell *matHeaderCellDef > Cupos </th>
-    <th mat-cell *matCellDef="let cursos" > {{ cursos.curso_cupo }} </th>
-  </ng-container>
+<div class="table-container">
+  <table mat-table [dataSource]="cursos" class="mat-elevation-z8 demo-table">
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let cursos"> {{ cursos.curso_nombre }} </td>
+    </ng-container>
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+      <td mat-cell *matCellDef="let cursos"> {{ cursos.curso_descripcion }} </td>
+    </ng-container>
+    <ng-container matColumnDef="cupo">
+      <th mat-header-cell *matHeaderCellDef> Cupos </th>
+      <td mat-cell *matCellDef="let cursos"> {{ cursos.curso_cupo }} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="horario">
-    <th mat-header-cell *matHeaderCellDef > Horario </th>
-    <th mat-cell *matCellDef="let cursos" > {{ cursos.curso_horario }} </th>
-  </ng-container>
+    <ng-container matColumnDef="horario">
+      <th mat-header-cell *matHeaderCellDef> Horario </th>
+      <td mat-cell *matCellDef="let cursos"> {{ cursos.curso_horario }} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="profesor">
-    <th mat-header-cell *matHeaderCellDef > Profesor </th>
-    <th mat-cell *matCellDef="let cursos" > {{ cursos.curso_profesor}} </th>
-  </ng-container>
+    <ng-container matColumnDef="profesor">
+      <th mat-header-cell *matHeaderCellDef> Profesor </th>
+      <td mat-cell *matCellDef="let cursos"> {{ cursos.curso_profesor}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="acciones" >
-    <th mat-header-cell *matHeaderCellDef > Acciones </th>
-    <th mat-cell  *matCellDef="let cursos">
-      <button mat-icon-button color="primary" matTooltip="Ver curso"  (click)="verDialogCurso(cursos.curso_id)">
-        <mat-icon fontIcon="visibility"></mat-icon>
-      </button>
-      <button mat-icon-button color="accent" matTooltip="Editar curso" (click)="editarDialogCurso(cursos.curso_id)">
-        <mat-icon fontIcon="edit"></mat-icon>
-      </button>
-      <button mat-icon-button color="warn" matTooltip="Inhabilitar curso" (click)="actulizarDialogEstadoCurso(cursos.curso_id,cursos.estudiante_estado)">
-        <mat-icon fontIcon="groups"></mat-icon>
-      </button>
-    </th>
-  </ng-container>
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let cursos">
+        <button mat-icon-button color="primary" matTooltip="Ver curso" (click)="verDialogCurso(cursos.curso_id)">
+          <mat-icon fontIcon="visibility"></mat-icon>
+        </button>
+        <button mat-icon-button color="accent" matTooltip="Editar curso" (click)="editarDialogCurso(cursos.curso_id)">
+          <mat-icon fontIcon="edit"></mat-icon>
+        </button>
+        <button mat-icon-button color="warn" matTooltip="Inhabilitar curso"
+          (click)="actulizarDialogEstadoCurso(cursos.curso_id,cursos.estudiante_estado)">
+          <mat-icon fontIcon="groups"></mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns; " ></tr>
-</table>
-
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns; " ></tr>
+  </table>
+</div>
