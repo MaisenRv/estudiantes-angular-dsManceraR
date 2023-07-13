@@ -1,0 +1,27 @@
+<h2 mat-dialog-title *ngIf="curso">Detalle del curso {{curso.curso_nombre}} </h2>
+<mat-dialog-content *ngIf="curso">
+  <h3>ID</h3>
+  <p>{{curso.curso_id}}</p>
+
+  <h3>Nombre</h3>
+  <p>{{curso.curso_nombre}}</p>
+
+  <h3>Profesor</h3>
+  <p>{{curso.curso_profesor}}</p>
+
+  <h3>Descripcion</h3>
+  <p>{{curso.curso_descripcion}}</p>
+
+  <h3>Cupo</h3>
+  <p>{{curso.curso_cupo}}</p>
+
+  <h3>Horario</h3>
+  <p>{{curso.curso_horario}}</p>
+
+  <h3>Fecha de creacion</h3>
+  <p>{{curso.curso_fechaCreacion}}</p>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

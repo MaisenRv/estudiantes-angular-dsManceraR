@@ -26,20 +26,20 @@
     <th mat-cell *matCellDef="let cursos" > {{ cursos.curso_profesor}} </th>
   </ng-container>
 
-  <!-- <ng-container matColumnDef="acciones" >
+  <ng-container matColumnDef="acciones" >
     <th mat-header-cell *matHeaderCellDef > Acciones </th>
-    <th mat-cell  *matCellDef="let estudiante">
-      <button mat-icon-button color="primary" matTooltip="Ver estudiante"  (click)="verEstudiante(estudiante.estudiante_id)">
+    <th mat-cell  *matCellDef="let cursos">
+      <button mat-icon-button color="primary" matTooltip="Ver curso"  (click)="verDialogCurso(cursos.curso_id)">
         <mat-icon fontIcon="visibility"></mat-icon>
       </button>
-      <button mat-icon-button color="accent" matTooltip="Editar estudiante" (click)="editarEstudiante(estudiante.estudiante_id)">
+      <button mat-icon-button color="accent" matTooltip="Editar curso" (click)="editarDialogCurso(cursos.curso_id)">
         <mat-icon fontIcon="edit"></mat-icon>
       </button>
-      <button mat-icon-button color="warn" matTooltip="Inhabilitar estudiante" (click)="actualizarEstadoEtudiante(estudiante.estudiante_id,estudiante.estudiante_estado)">
-        <mat-icon fontIcon="person_remove"></mat-icon>
+      <button mat-icon-button color="warn" matTooltip="Inhabilitar curso" (click)="actulizarDialogEstadoCurso(cursos.curso_id,cursos.estudiante_estado)">
+        <mat-icon fontIcon="groups"></mat-icon>
       </button>
     </th>
-  </ng-container> -->
+  </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns; " ></tr>

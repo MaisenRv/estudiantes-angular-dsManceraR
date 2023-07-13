@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { CursosServicioService } from '../cursos-servicio.service';
+import { CursoPOST } from 'src/app/interfaces/shared/curso.interface';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-registro-cursos',
@@ -13,13 +15,14 @@ export class RegistroCursosComponent implements OnInit {
 
   constructor(
     private fb:FormBuilder,
-    private servicio:CursosServicioService
+    private servicio:CursosServicioService,
+    private registroDialogRef:DialogRef<RegistroCursosComponent>
   ){
 
   }
   ngOnInit(): void {
     this.formRegistroCursos = this.fb.group({
-      nombre: ['',[Validators.required,Validators.minLength(3),Validators.maxLength(10)]],
+      nombre: ['',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]],
       descripcion: ['',[Validators.required,Validators.maxLength(100)]],
       cupo: ['',[Validators.required]],
       horario: ['',[Validators.required]],
@@ -29,9 +32,11 @@ export class RegistroCursosComponent implements OnInit {
 
   onSubmit(){
     if (this.formRegistroCursos.valid) {
-      this.servicio.crearCurso(this.formRegistroCursos.value).subscribe({
+      const nuevoCurso:CursoPOST = this.formRegistroCursos.value;
+      this.servicio.crearCurso(nuevoCurso).subscribe({
         next:(res)=>{
-          console.log(res);
+          alert("Curso agregado correctamente");
+          this.registroDialogRef.close();
         },
         error:(err)=>{
           console.log(err);

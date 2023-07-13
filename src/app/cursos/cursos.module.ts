@@ -13,11 +13,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { VerCursoComponent } from './ver-curso/ver-curso.component';
+import { EditarCursoComponent } from './editar-curso/editar-curso.component';
 
 @NgModule({
   declarations: [
     ListadoCursosComponent,
-    RegistroCursosComponent
+    RegistroCursosComponent,
+    VerCursoComponent,
+    EditarCursoComponent
   ],
   imports: [
     CommonModule,
