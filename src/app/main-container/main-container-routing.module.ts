@@ -7,6 +7,7 @@ import { AyudaComponent } from '../user/ayuda/ayuda.component';
 import { MiCuentaComponent } from '../user/mi-cuenta/mi-cuenta.component';
 import { ConsultaComponent } from '../estudiantes/consulta/consulta.component';
 import { ListadoCursosComponent } from '../cursos/listado-cursos/listado-cursos.component';
+import { ListaInscripcionesComponent } from '../inscripciones/lista-inscripciones/lista-inscripciones.component';
 
 const routes: Routes = [
   { path: 'main',
@@ -17,6 +18,7 @@ const routes: Routes = [
       {path: 'miCuenta', component: MiCuentaComponent},
       {path: 'estudiantes', component: ConsultaComponent},
       {path: 'cursos', component: ListadoCursosComponent},
+      {path: 'inscripciones', component: ListaInscripcionesComponent},
     ]
   },
 ];

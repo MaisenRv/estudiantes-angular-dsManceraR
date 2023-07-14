@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { MainContainerModule } from './main-container/main-container.module';
 import { EstudiantesModule } from './estudiantes/estudiantes.module';
 import { CursosModule } from './cursos/cursos.module';
+import { InscripcionesModule } from './inscripciones/inscripciones.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CursosModule } from './cursos/cursos.module';
     UserModule,
     MainContainerModule,
     EstudiantesModule,
-    CursosModule
+    CursosModule,
+    InscripcionesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
