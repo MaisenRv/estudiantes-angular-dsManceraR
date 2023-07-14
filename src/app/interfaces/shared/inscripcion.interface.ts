@@ -6,3 +6,13 @@ export interface EstudianteInscripcionGET{
   inscripcion_fechaCreacion: string,
   inscripcion_id: number
 }
+
+export interface EstudianteInscripcionPOST{
+  estudianteId: number,
+  cursoId: number,
+  estado: number
+}
+
+export interface EstudianteEstadoInscripcionPUT{
+  estado: number
+}

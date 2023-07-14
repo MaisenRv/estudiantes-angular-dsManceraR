@@ -42,13 +42,14 @@ export class RegistroComponent implements OnInit {
     })
   }
 
-  onSubmit(){
+  onSubmit(e:any){
     if (this.formRegistro.valid) {
+      e.target[8].disabled = true
       const nuevoEstudiante:EstudiantePOST = this.formRegistro.value;
       this.servicio.crearEstudiante(nuevoEstudiante).subscribe({
         next: (res)=>{
+          alert(res.message)
           this.dialogR.close();
-          console.log(res);
         },
         error: (err)=>{
           let msg:String = "";

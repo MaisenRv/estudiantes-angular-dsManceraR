@@ -30,8 +30,9 @@ export class RegistroCursosComponent implements OnInit {
     })
   }
 
-  onSubmit(){
+  onSubmit(e:any){
     if (this.formRegistroCursos.valid) {
+      e.target[6].disabled = true;
       const nuevoCurso:CursoPOST = this.formRegistroCursos.value;
       this.servicio.crearCurso(nuevoCurso).subscribe({
         next:(res)=>{

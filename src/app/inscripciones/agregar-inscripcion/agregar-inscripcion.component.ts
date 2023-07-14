@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EstudianteGET } from 'src/app/interfaces/shared/estudiante.interface';
-import { EstudianteInscripcionGET } from 'src/app/interfaces/shared/inscripcion.interface';
+import { EstudianteInscripcionGET, EstudianteInscripcionPOST } from 'src/app/interfaces/shared/inscripcion.interface';
 import { SelectEstudiantesInscripcion } from 'src/app/interfaces/shared/select.interface';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
+import { InscripcionServicioService } from '../inscripcion-servicio.service';
 
 @Component({
   selector: 'app-agregar-inscripcion',
@@ -20,7 +21,9 @@ export class AgregarInscripcionComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private servicioEstudiantes: EstudiantesService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private servicioInscripciones: InscripcionServicioService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogAgregarRef:MatDialogRef<AgregarInscripcionComponent>
   ) {
     this.formRegistroInscripcion = this.fb.group({
       estudianteId: ['', [Validators.required]]
@@ -37,11 +40,27 @@ export class AgregarInscripcionComponent implements OnInit {
         console.log(err);
       }
     })
-
   }
 
-  onSubmit(): void {
+  onSubmit(e:any): void {
+    if (this.formRegistroInscripcion.valid) {
+      e.target[1].disabled = true;
+      const nuevaInscripcion: EstudianteInscripcionPOST ={
+        cursoId: this.data.cursoId,
+        estudianteId: this.formRegistroInscripcion.value.estudianteId,
+        estado: 1
+      }
+      this.servicioInscripciones.crearInscripcion(nuevaInscripcion).subscribe({
+        next:(res)=>{
+          alert(res.message)
+          this.dialogAgregarRef.close();
+        },
+        error:(err)=>{
+          console.log(err);
 
+        }
+      })
+    }
   }
 
   removerItemEnArray(arr:SelectEstudiantesInscripcion[], objeto:SelectEstudiantesInscripcion){
@@ -74,20 +93,14 @@ export class AgregarInscripcionComponent implements OnInit {
     }
 
     for (const estudianteIns of estIns) {
-      for (const estNoIns of estudiantesNoInscritos) {
-        if ( estudianteIns.estudiante_id == estNoIns.refEstudiante && estudianteIns.inscripcion_estado == 1 ) {
-
-          const estudianteEncontrado:SelectEstudiantesInscripcion = {
-            refEstudiante:estudianteIns.estudiante_id,
-            infoEstudiante:{
-              value: estudianteIns.estudiante_id,
-              viewValue: estudianteIns.estudiante_nombres + " " + estudianteIns.estudiante_apellidos
-            }
-          }
-          this.removerItemEnArray(estudiantesNoInscritos,estudianteEncontrado)
-          break;
+      const estudianteFormateado:SelectEstudiantesInscripcion = {
+        refEstudiante:estudianteIns.estudiante_id,
+        infoEstudiante:{
+          value: estudianteIns.estudiante_id,
+          viewValue: estudianteIns.estudiante_nombres + " " + estudianteIns.estudiante_apellidos
         }
       }
+      this.removerItemEnArray(estudiantesNoInscritos,estudianteFormateado)
     }
     this.listaEstudiantes = estudiantesNoInscritos;
   }

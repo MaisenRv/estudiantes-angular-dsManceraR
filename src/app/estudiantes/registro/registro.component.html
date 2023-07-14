@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Registro estudiantes</h2>
 <mat-dialog-content>
-  <form [formGroup]="formRegistro" (submit)="onSubmit()" >
+  <form [formGroup]="formRegistro" (submit)="onSubmit($event)" >
     <mat-form-field class="formRegistroRow">
       <mat-label> Tipo identificacion </mat-label>
       <mat-select formControlName="tipoIdentificacion">

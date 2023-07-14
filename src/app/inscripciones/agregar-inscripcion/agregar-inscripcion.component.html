@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>Agregar Inscripcion</h2>
 <mat-dialog-content>
-  <form [formGroup]="formRegistroInscripcion" (submit)="onSubmit()" >
+  <form [formGroup]="formRegistroInscripcion" (submit)="onSubmit($event)" >
 
     <mat-form-field class="formRegistroRow">
-      <mat-label> Tipo identificacion </mat-label>
+      <mat-label> Seleccione el estudiante </mat-label>
       <mat-select formControlName="estudianteId" >
         <mat-option *ngFor="let estudiante of listaEstudiantes" [value]="estudiante.infoEstudiante.value" >
           {{estudiante.infoEstudiante.viewValue}}

@@ -5,7 +5,7 @@ import { CursoGET } from 'src/app/interfaces/shared/curso.interface';
 import { SelectCursos } from 'src/app/interfaces/shared/select.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InscripcionServicioService } from '../inscripcion-servicio.service';
-import { EstudianteInscripcionGET } from 'src/app/interfaces/shared/inscripcion.interface';
+import { EstudianteEstadoInscripcionPUT, EstudianteInscripcionGET } from 'src/app/interfaces/shared/inscripcion.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarInscripcionComponent } from '../agregar-inscripcion/agregar-inscripcion.component';
 
@@ -39,6 +39,7 @@ export class ListaInscripcionesComponent implements OnInit {
   ngOnInit(): void {
     this.servicioCursos.obtenerCursos().subscribe({
       next:(res)=>{
+        this.listaCursos = [];
         const cursos:CursoGET[] = res.data;
         for (let curso of cursos) {
           this.listaCursos.push({
@@ -53,13 +54,13 @@ export class ListaInscripcionesComponent implements OnInit {
     })
   }
 
+
   onSubmit(): void{
     if (this.formSelectCurso.valid) {
       this.servicioInscripcion.obtenerInscripcion(this.formSelectCurso.value.idCurso).subscribe({
         next:(res)=>{
           this.listaEstudiantesInscripciones = res.data;
           this.numeroEstudiantesInscritos = res.data.length;
-          console.log(this.listaEstudiantesInscripciones);
         },
         error:(err)=>{
           console.log(err);
@@ -86,9 +87,42 @@ export class ListaInscripcionesComponent implements OnInit {
         estudianteInscritos: this.listaEstudiantesInscripciones
       }
     })
+    dialogRef.afterClosed().subscribe({
+      next:()=>{
+        this.numeroEstudiantesInscritos = 0;
+        this.numeroCuposCurso = 0;
+        this.onSubmit()
+      }
+    })
+  }
+
+  actualizarEstadoInscripcion(id:number, estado:number): void{
+    let estadoActulizado:number = 0;
+    if (estado == 1) {
+      estadoActulizado = 0;
+    }else if (estado == 0) {
+      estadoActulizado = 1;
+    }
+
+    const inscripcionActualizada:EstudianteEstadoInscripcionPUT = {
+      estado: estadoActulizado
+    }
+    this.servicioInscripcion.actualizarInscripcion(id,inscripcionActualizada).subscribe({
+      next:(res)=>{
+        alert(res.message)
+        // console.log(res);
+      },
+      error:(err)=>{
+        console.log(err);
+
+      }
+    })
   }
 
   get isEstudiantesInscriptos():boolean{
     return this.numeroEstudiantesInscritos > 0;
+  }
+  get isCuposLlenos():boolean{
+    return !(this.numeroEstudiantesInscritos >= this.numeroCuposCurso);
   }
 }
