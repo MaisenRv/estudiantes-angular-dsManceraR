@@ -1,0 +1,68 @@
+<div class="container-head">
+  <div class="container-form-cursos">
+    <form [formGroup]="formSelectCurso" class="form-cursos">
+      <mat-form-field class="select-curso">
+        <mat-label > Seleccione un curso </mat-label>
+        <mat-select formControlName="idCurso" >
+          <mat-option *ngFor="let curso of listaCursos" [value]="curso.value">
+            {{curso.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" (click)="onSubmit()"> Consultar </button>
+    </form>
+  </div>
+  <div class="container-controles">
+    <div class="container-controles-info">
+      <h3>Numero de cupos: </h3>
+      <h3>Numero de inscriptos: {{numeroEstudiantesInscritos}}</h3>
+    </div>
+    <div class="container-controles-acciones">
+      <button mat-raised-button color="primary" > Agregar Inscripcion</button>
+    </div>
+  </div>
+
+</div>
+<div class="table-container" *ngIf="isEstudiantesInscriptos; else noEstudiantes">
+  <table #table mat-table [dataSource]="listaEstudiantesInscripciones" class="mat-elevation-z8 demo-table" >
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let inscripcion"> {{ inscripcion.estudiante_nombres }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="apellido">
+      <th mat-header-cell *matHeaderCellDef> Apellido </th>
+      <td mat-cell *matCellDef="let inscripcion"> {{ inscripcion.estudiante_apellidos }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef="let inscripcion"> {{ inscripcion.inscripcion_estado }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaCreacion">
+      <th mat-header-cell *matHeaderCellDef> Fecha de creacion </th>
+      <td mat-cell *matCellDef="let inscripcion"> {{ inscripcion.inscripcion_fechaCreacion }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let estudiante">
+        <button mat-icon-button color="warn" matTooltip="Inhabilitar estudiante">
+          <mat-icon fontIcon="person_remove"></mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns; " ></tr>
+  </table>
+
+</div>
+<ng-template #noEstudiantes >
+  <div class="container-no-estudiantes">
+    <p *ngIf="listaEstudiantesInscripciones">No hay estudiantes inscriptos en este curso</p>
+  </div>
+</ng-template>
+
