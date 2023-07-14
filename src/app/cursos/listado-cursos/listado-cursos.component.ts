@@ -79,7 +79,7 @@ export class ListadoCursosComponent implements OnInit {
   }
 
   actulizarDialogEstadoCurso(id:number,estado:string){
-
+    // La API no regresa el estado del curso
   }
 
 }
