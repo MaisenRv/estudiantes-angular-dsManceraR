@@ -61,3 +61,7 @@ button{
   /* padding: 10px; */
   box-sizing: border-box;
 }
+
+.select-curso{
+  width: 400px;
+}

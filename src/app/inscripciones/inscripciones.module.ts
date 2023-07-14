@@ -7,12 +7,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { AgregarInscripcionComponent } from './agregar-inscripcion/agregar-inscripcion.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
 @NgModule({
   declarations: [
-    ListaInscripcionesComponent
+    ListaInscripcionesComponent,
+    AgregarInscripcionComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     MatButtonModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ]
 })
 export class InscripcionesModule { }

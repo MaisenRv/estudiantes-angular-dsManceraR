@@ -6,6 +6,8 @@ import { SelectCursos } from 'src/app/interfaces/shared/select.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InscripcionServicioService } from '../inscripcion-servicio.service';
 import { EstudianteInscripcionGET } from 'src/app/interfaces/shared/inscripcion.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { AgregarInscripcionComponent } from '../agregar-inscripcion/agregar-inscripcion.component';
 
 @Component({
   selector: 'app-lista-inscripciones',
@@ -25,7 +27,8 @@ export class ListaInscripcionesComponent implements OnInit {
   constructor(
     private servicioCursos:CursosServicioService,
     private servicioInscripcion:InscripcionServicioService,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    public dialogAgregarInscripcion:MatDialog
   ){
     this.formSelectCurso = this.fb.group({
       idCurso: ['',Validators.required]
@@ -72,6 +75,17 @@ export class ListaInscripcionesComponent implements OnInit {
         }
       })
     }
+  }
+
+
+  agregarInscripcion():void{
+    const dialogRef = this.dialogAgregarInscripcion.open(AgregarInscripcionComponent,{
+      width:"500px",
+      data: {
+        cursoId: this.formSelectCurso.value.idCurso,
+        estudianteInscritos: this.listaEstudiantesInscripciones
+      }
+    })
   }
 
   get isEstudiantesInscriptos():boolean{
