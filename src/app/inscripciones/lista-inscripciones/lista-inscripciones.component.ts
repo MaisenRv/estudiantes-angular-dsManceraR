@@ -20,6 +20,7 @@ export class ListaInscripcionesComponent implements OnInit {
 
   listaEstudiantesInscripciones!:EstudianteInscripcionGET[];
   numeroEstudiantesInscritos!:number;
+  numeroCuposCurso!:number;
 
   constructor(
     private servicioCursos:CursosServicioService,
@@ -56,6 +57,15 @@ export class ListaInscripcionesComponent implements OnInit {
           this.listaEstudiantesInscripciones = res.data;
           this.numeroEstudiantesInscritos = res.data.length;
           console.log(this.listaEstudiantesInscripciones);
+        },
+        error:(err)=>{
+          console.log(err);
+        }
+      })
+      this.servicioCursos.obtenerCurso(this.formSelectCurso.value.idCurso).subscribe({
+        next:(res)=>{
+          const curso:CursoGET = res.data[0];
+          this.numeroCuposCurso = curso.curso_cupo;
         },
         error:(err)=>{
           console.log(err);

@@ -8,14 +8,16 @@
             {{curso.viewValue}}
           </mat-option>
         </mat-select>
+
+        <mat-error *ngIf="formSelectCurso.controls['idCurso']?.errors?.['required']"> Este campo es requerido </mat-error>
       </mat-form-field>
 
       <button mat-raised-button color="primary" type="submit" (click)="onSubmit()"> Consultar </button>
     </form>
   </div>
-  <div class="container-controles">
+  <div class="container-controles" *ngIf="listaEstudiantesInscripciones">
     <div class="container-controles-info">
-      <h3>Numero de cupos: </h3>
+      <h3>Numero de cupos: {{numeroCuposCurso}}</h3>
       <h3>Numero de inscriptos: {{numeroEstudiantesInscritos}}</h3>
     </div>
     <div class="container-controles-acciones">

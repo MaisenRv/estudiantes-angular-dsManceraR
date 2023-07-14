@@ -22,8 +22,6 @@ export class VerCursoComponent implements OnInit {
     this.servicio.obtenerCurso(this.data.id).subscribe({
       next:(res)=>{
         this.curso = res.data[0];
-        console.log(res);
-
       },
       error:(err)=>{
         console.log(err);
